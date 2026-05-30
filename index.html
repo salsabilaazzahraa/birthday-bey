@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <title>💙 Happy 19th Birthday Bey!</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Nunito:wght@400;600;700;800;900&family=Dancing+Script:wght@600;700&family=Pacifico&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- PASSCODE -->
+<div id="passcodePage" class="fullpage-overlay active">
+  <div class="pc-floats">
+    <span class="pc-float-el" style="top:8%;left:5%;font-size:2.2rem;animation-delay:0s">💙</span>
+    <span class="pc-float-el" style="top:15%;right:8%;font-size:1.6rem;animation-delay:1s">🐱</span>
+    <span class="pc-float-el" style="top:60%;left:4%;font-size:1.8rem;animation-delay:2s">🌟</span>
+    <span class="pc-float-el" style="top:70%;right:6%;font-size:2rem;animation-delay:.5s">💫</span>
+    <span class="pc-float-el" style="bottom:10%;left:20%;font-size:1.6rem;animation-delay:3s">🦋</span>
+    <span class="pc-float-el" style="bottom:20%;right:15%;font-size:1.5rem;animation-delay:2.5s">🐾</span>
+  </div>
+  <div class="d-flex align-items-center justify-content-center min-vh-100 px-3">
+    <div class="pc-card" id="pcCard">
+      <div class="pc-icon-wrap">
+        <div class="pc-icon-ring ring1"></div>
+        <div class="pc-icon-ring ring2"></div>
+        <i class="fas fa-lock-open pc-lock-icon"></i>
+      </div>
+      <h2 class="pc-title">Secret for Bey 🔐</h2>
+      <p class="pc-subtitle">Masukkan kode spesial kita ya, sayang</p>
+      <div class="pc-dots-row" id="pcDots">
+        <div class="pcdot" id="pd0"><div class="pcdot-fill"></div></div>
+        <div class="pcdot" id="pd1"><div class="pcdot-fill"></div></div>
+        <div class="pcdot" id="pd2"><div class="pcdot-fill"></div></div>
+        <div class="pcdot" id="pd3"><div class="pcdot-fill"></div></div>
+      </div>
+      <div class="pc-keypad">
+        <button class="pckey" onclick="pcAdd(1)">1</button>
+        <button class="pckey" onclick="pcAdd(2)">2</button>
+        <button class="pckey" onclick="pcAdd(3)">3</button>
+        <button class="pckey" onclick="pcAdd(4)">4</button>
+        <button class="pckey" onclick="pcAdd(5)">5</button>
+        <button class="pckey" onclick="pcAdd(6)">6</button>
+        <button class="pckey" onclick="pcAdd(7)">7</button>
+        <button class="pckey" onclick="pcAdd(8)">8</button>
+        <button class="pckey" onclick="pcAdd(9)">9</button>
+        <button class="pckey pckey-heart" onclick="pcAdd(0)"><i class="fas fa-heart"></i></button>
+        <button class="pckey" onclick="pcAdd(0)">0</button>
+        <button class="pckey pckey-del" onclick="pcDel()"><i class="fas fa-delete-left"></i></button>
+      </div>
+      <div id="pcErr" class="pc-err"></div>
+      <div class="pc-footer-note">💙 Made with love for Andromeda</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="mainContent" style="display:none">
+
+  <!-- CAT MASCOT (floating, always visible) -->
+  <div class="cat-float" onclick="showCatMsg();SFX.cat();popConfetti(.85,.85,15)">
+    <div class="cat-speech" id="catSpeech">Nyaaan 🐾</div>
+    <svg width="70" height="70" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cat body -->
+      <ellipse cx="50" cy="65" rx="28" ry="22" fill="#AED9F5"/>
+      <!-- Cat head -->
+      <circle cx="50" cy="38" r="24" fill="#AED9F5"/>
+      <!-- Ears -->
+      <polygon points="28,20 22,5 38,18" fill="#AED9F5"/>
+      <polygon points="72,20 78,5 62,18" fill="#AED9F5"/>
+      <polygon points="30,19 25,8 37,18" fill="#FFB6C1"/>
+      <polygon points="70,19 75,8 63,18" fill="#FFB6C1"/>
+      <!-- Eyes -->
+      <ellipse cx="42" cy="36" rx="5" ry="6" fill="#2C5364"/>
+      <ellipse cx="58" cy="36" rx="5" ry="6" fill="#2C5364"/>
+      <circle cx="43" cy="34" r="2" fill="white"/>
+      <circle cx="59" cy="34" r="2" fill="white"/>
+      <!-- Nose -->
+      <ellipse cx="50" cy="44" rx="3" ry="2" fill="#FF85A1"/>
+      <!-- Mouth -->
+      <path d="M47 46 Q50 50 53 46" stroke="#2C5364" stroke-width="1.5" fill="none"/>
+      <!-- Whiskers -->
+      <line x1="20" y1="43" x2="40" y2="45" stroke="#5AABDD" stroke-width="1.5"/>
+      <line x1="20" y1="47" x2="40" y2="47" stroke="#5AABDD" stroke-width="1.5"/>
+      <line x1="60" y1="45" x2="80" y2="43" stroke="#5AABDD" stroke-width="1.5"/>
+      <line x1="60" y1="47" x2="80" y2="47" stroke="#5AABDD" stroke-width="1.5"/>
+      <!-- Blush -->
+      <ellipse cx="35" cy="48" rx="6" ry="4" fill="#FFB6C1" opacity=".5"/>
+      <ellipse cx="65" cy="48" rx="6" ry="4" fill="#FFB6C1" opacity=".5"/>
+      <!-- Tail -->
+      <path d="M75 72 Q90 60 85 50 Q82 44 78 50" stroke="#5AABDD" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <!-- Paws -->
+      <ellipse cx="35" cy="84" rx="10" ry="7" fill="#AED9F5"/>
+      <ellipse cx="65" cy="84" rx="10" ry="7" fill="#AED9F5"/>
+      <!-- Heart -->
+      <text x="44" y="72" font-size="12">💙</text>
+    </svg>
+  </div>
+
+  <!-- MUSIC PLAYER -->
+  <div class="music-player">
+    <button class="mp-btn" onclick="toggleMusic()">
+      <i class="fas fa-play" id="mpIcon"></i>
+    </button>
+    <div class="mp-info">
+      <div class="mp-track">🎵 Play This Song</div>
+      <div class="mp-eq paused" id="mpEq"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav" id="sideNav">
+    <div class="sn-dot active" data-page="p1" onclick="toPage('p1')" title="Sayang Aku?"></div>
+    <div class="sn-dot" data-page="p1b" onclick="toPage('p1b')" title="Decorate"></div>
+    <div class="sn-dot" data-page="p2" onclick="toPage('p2')" title="Birthday"></div>
+    <div class="sn-dot" data-page="p3" onclick="toPage('p3')" title="Tiup Lilin"></div>
+    <div class="sn-dot" data-page="p3b" onclick="toPage('p3b')" title="Cut Cake"></div>
+    <div class="sn-dot" data-page="p4" onclick="toPage('p4')" title="Surat"></div>
+    <div class="sn-dot" data-page="p5" onclick="toPage('p5')" title="Gallery"></div>
+    <div class="sn-dot" data-page="p6" onclick="toPage('p6')" title="Journey"></div>
+    <div class="sn-dot" data-page="p7" onclick="toPage('p7')" title="Quiz"></div>
+    <div class="sn-dot" data-page="p9" onclick="toPage('p9')" title="Wishes"></div>
+    <div class="sn-dot" data-page="p10" onclick="toPage('p10')" title="Secret Plan"></div>
+  </nav>
+
+  <!-- ══ P1: SAYANG AKU GA ══ -->
+  <section id="p1" class="pg pg-active">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob2"></div><div class="bg-blob blob3"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3">
+      <div id="sayangBox" class="content-card text-center animate-in">
+        <img src="https://cdn-icons-png.flaticon.com/512/4341/4341025.png" class="bear-mascot" alt="cute"/>
+        <h1 class="sayang-q">Kamu sayang aku ga?</h1>
+        <p class="sayang-sub">Jawab jujur awas aj klo bohonk</p>
+        <div class="sayang-btn-zone" id="sayangBtnZone">
+          <button class="btn-sayang" id="btnSayang" onclick="onSayang()"><i class="fas fa-heart me-2"></i>Sayang</button>
+          <button class="btn-gasayang" id="btnGaSayang" onclick="onGaSayang()"><i class="fas fa-heart-crack me-2"></i>Ga Sayang</button>
+        </div>
+        <div id="sayangMsg" class="sayang-msg"></div>
+      </div>
+      <div id="sayangResult" class="content-card text-center animate-in" style="display:none">
+        <div class="result-emoji">🥰💕</div>
+        <h2 class="result-h2">I KNOW IT!!!</h2>
+        <p class="result-p">Tau kok kamu pasti sayang aku! Maacii yh bey, you literally just made my whole day. 💙</p>
+        <img src="https://cdn-icons-png.flaticon.com/512/4341/4341157.png" class="result-cute" alt="cute"/>
+        <button class="btn-fancy mt-3" onclick="toPage('p1b')">Decorate it! 🎨 <i class="fas fa-arrow-right ms-2"></i></button>
+      </div>
+      <div id="quizFailMsg" class="content-card text-center animate-in" style="display:none">
+        <div style="font-size:3.5rem">😤💔</div>
+        <h3 style="color:var(--pink-main);margin:12px 0">Yah, kamu lupa aku! uda ga sayang aku lagi</h3>
+        <p style="color:var(--text-soft);line-height:1.7">2 kesempatan sudah habis. Beneran lupa momen kita? 😭 CTW sie aku ma</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P1b: DECORATE ══ -->
+  <section id="p1b" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob2"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3 py-4">
+      <div class="decorate-wrap text-center animate-in">
+
+        <!-- Header -->
+        <div class="deco-header-row mb-1">
+          <svg width="38" height="38" viewBox="0 0 38 38"><path d="M19 4 Q22 10 28 10 Q22 14 24 22 Q19 17 14 22 Q16 14 10 10 Q16 10 19 4Z" fill="#FFD700" opacity=".85"/></svg>
+          <h2 class="section-title mb-0" style="display:inline;vertical-align:middle">Decorate Your Moment</h2>
+          <svg width="38" height="38" viewBox="0 0 38 38"><path d="M19 4 Q22 10 28 10 Q22 14 24 22 Q19 17 14 22 Q16 14 10 10 Q16 10 19 4Z" fill="#FFD700" opacity=".85"/></svg>
+        </div>
+        <p class="section-sub mb-3">Pilih balon dan frame untuk mempercantik foto Bey ✨</p>
+
+        <!-- Aesthetic balloon row -->
+        <div class="aes-balloon-row mb-3" id="balloonRow">
+          <!-- Balloon 1 - Dusty Rose -->
+          <div class="aes-balloon" onclick="placeBalloon(this)" data-color="#E8A0A0">
+            <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg" width="38">
+              <ellipse cx="22" cy="22" rx="16" ry="20" fill="#E8A0A0"/>
+              <ellipse cx="16" cy="14" rx="5" ry="4" fill="white" opacity=".3" transform="rotate(-20 16 14)"/>
+              <path d="M22 42 Q20 48 22 54" stroke="#C47C7C" stroke-width="1.5" fill="none"/>
+              <path d="M18 54 Q22 52 26 54" stroke="#C47C7C" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <!-- Balloon 2 - Sky Blue -->
+          <div class="aes-balloon" onclick="placeBalloon(this)" data-color="#7EC8E3">
+            <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg" width="38">
+              <ellipse cx="22" cy="22" rx="16" ry="20" fill="#7EC8E3"/>
+              <ellipse cx="16" cy="14" rx="5" ry="4" fill="white" opacity=".3" transform="rotate(-20 16 14)"/>
+              <path d="M22 42 Q20 48 22 54" stroke="#5AABCC" stroke-width="1.5" fill="none"/>
+              <path d="M18 54 Q22 52 26 54" stroke="#5AABCC" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <!-- Balloon 3 - Lavender -->
+          <div class="aes-balloon" onclick="placeBalloon(this)" data-color="#C5A8E8">
+            <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg" width="38">
+              <ellipse cx="22" cy="22" rx="16" ry="20" fill="#C5A8E8"/>
+              <ellipse cx="16" cy="14" rx="5" ry="4" fill="white" opacity=".3" transform="rotate(-20 16 14)"/>
+              <path d="M22 42 Q20 48 22 54" stroke="#9B78C8" stroke-width="1.5" fill="none"/>
+              <path d="M18 54 Q22 52 26 54" stroke="#9B78C8" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <!-- Balloon 4 - Sage Green -->
+          <div class="aes-balloon" onclick="placeBalloon(this)" data-color="#A8D5B5">
+            <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg" width="38">
+              <ellipse cx="22" cy="22" rx="16" ry="20" fill="#A8D5B5"/>
+              <ellipse cx="16" cy="14" rx="5" ry="4" fill="white" opacity=".3" transform="rotate(-20 16 14)"/>
+              <path d="M22 42 Q20 48 22 54" stroke="#78B590" stroke-width="1.5" fill="none"/>
+              <path d="M18 54 Q22 52 26 54" stroke="#78B590" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <!-- Balloon 5 - Warm Gold -->
+          <div class="aes-balloon" onclick="placeBalloon(this)" data-color="#F5D87A">
+            <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg" width="38">
+              <ellipse cx="22" cy="22" rx="16" ry="20" fill="#F5D87A"/>
+              <ellipse cx="16" cy="14" rx="5" ry="4" fill="white" opacity=".3" transform="rotate(-20 16 14)"/>
+              <path d="M22 42 Q20 48 22 54" stroke="#C8A840" stroke-width="1.5" fill="none"/>
+              <path d="M18 54 Q22 52 26 54" stroke="#C8A840" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <!-- Balloon 6 - Blush Peach -->
+          <div class="aes-balloon" onclick="placeBalloon(this)" data-color="#F4C2A8">
+            <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg" width="38">
+              <ellipse cx="22" cy="22" rx="16" ry="20" fill="#F4C2A8"/>
+              <ellipse cx="16" cy="14" rx="5" ry="4" fill="white" opacity=".3" transform="rotate(-20 16 14)"/>
+              <path d="M22 42 Q20 48 22 54" stroke="#C89070" stroke-width="1.5" fill="none"/>
+              <path d="M18 54 Q22 52 26 54" stroke="#C89070" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Photo frame with active frame overlay -->
+        <div class="aes-photo-wrap mx-auto mb-3" id="photoWrap">
+          <!-- Frame SVG overlay (changes on frame select) -->
+          <div id="frameOverlay" class="aes-frame-overlay"></div>
+          <!-- Corner ornaments -->
+          <div class="aes-corner aes-corner-tl" id="cornerTL">
+            <svg viewBox="0 0 40 40" width="40"><path d="M4 36 Q4 4 36 4" stroke="#AED9F5" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="8" cy="8" r="3" fill="#FFD700"/><path d="M14 4 Q10 10 4 14" stroke="#FFB6C1" stroke-width="1.5" fill="none"/></svg>
+          </div>
+          <div class="aes-corner aes-corner-tr" id="cornerTR">
+            <svg viewBox="0 0 40 40" width="40"><path d="M36 36 Q36 4 4 4" stroke="#AED9F5" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="32" cy="8" r="3" fill="#FFD700"/><path d="M26 4 Q30 10 36 14" stroke="#FFB6C1" stroke-width="1.5" fill="none"/></svg>
+          </div>
+          <div class="aes-corner aes-corner-bl" id="cornerBL">
+            <svg viewBox="0 0 40 40" width="40"><path d="M4 4 Q4 36 36 36" stroke="#AED9F5" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="8" cy="32" r="3" fill="#FFD700"/></svg>
+          </div>
+          <div class="aes-corner aes-corner-br" id="cornerBR">
+            <svg viewBox="0 0 40 40" width="40"><path d="M36 4 Q36 36 4 36" stroke="#AED9F5" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="#FFD700"/></svg>
+          </div>
+
+          <img src="image/bey.jpg" alt="Bey" class="aes-photo-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="aes-photo-fallback">
+            <i class="fas fa-cat" style="font-size:2.5rem;color:var(--blue-main)"></i>
+            <p style="font-weight:800;font-size:.85rem;margin:8px 0 0;color:var(--blue-main)">Taruh foto bey.jpg di folder image!</p>
+          </div>
+
+          <!-- Balloon pop area (shows clicked balloon floating over photo) -->
+          <div id="balloonPopArea" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:16px"></div>
+        </div>
+
+        <!-- Caption -->
+        <p class="aes-photo-caption mb-3">✦ Andromeda  &nbsp;·&nbsp; 31 Mei 2026 ✦</p>
+
+        <!-- Frame picker -->
+        <p style="color:var(--text-soft);font-size:.82rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px">Pilih frame:</p>
+        <div class="aes-frame-picker mb-4">
+          <!-- Frame 1: Minimalist lines -->
+          <div class="aes-frame-opt" onclick="applyFrame(this,'frame-minimal')" title="Minimalist">
+            <svg viewBox="0 0 48 48" width="44">
+              <rect x="4" y="4" width="40" height="40" rx="4" fill="none" stroke="#AED9F5" stroke-width="2.5"/>
+              <rect x="8" y="8" width="32" height="32" rx="2" fill="none" stroke="#AED9F5" stroke-width="1" stroke-dasharray="3,2"/>
+            </svg>
+            <span>Minimal</span>
+          </div>
+          <!-- Frame 2: Floral corners -->
+          <div class="aes-frame-opt" onclick="applyFrame(this,'frame-floral')" title="Floral">
+            <svg viewBox="0 0 48 48" width="44">
+              <rect x="6" y="6" width="36" height="36" rx="6" fill="none" stroke="#FFB6C1" stroke-width="2"/>
+              <circle cx="6" cy="6" r="4" fill="#FFB6C1" opacity=".7"/>
+              <circle cx="42" cy="6" r="4" fill="#FFB6C1" opacity=".7"/>
+              <circle cx="6" cy="42" r="4" fill="#FFB6C1" opacity=".7"/>
+              <circle cx="42" cy="42" r="4" fill="#FFB6C1" opacity=".7"/>
+              <path d="M6 18 Q10 14 14 18" stroke="#FFB6C1" stroke-width="1.5" fill="none"/>
+              <path d="M34 6 Q38 10 34 14" stroke="#FFB6C1" stroke-width="1.5" fill="none"/>
+            </svg>
+            <span>Floral</span>
+          </div>
+          <!-- Frame 3: Gold elegant -->
+          <div class="aes-frame-opt" onclick="applyFrame(this,'frame-gold')" title="Gold">
+            <svg viewBox="0 0 48 48" width="44">
+              <rect x="4" y="4" width="40" height="40" rx="3" fill="none" stroke="#F5D87A" stroke-width="3"/>
+              <rect x="7" y="7" width="34" height="34" rx="2" fill="none" stroke="#F5D87A" stroke-width="1"/>
+              <path d="M4 18 L8 14 L4 10" stroke="#F5D87A" stroke-width="1.5" fill="none"/>
+              <path d="M44 18 L40 14 L44 10" stroke="#F5D87A" stroke-width="1.5" fill="none"/>
+              <path d="M4 30 L8 34 L4 38" stroke="#F5D87A" stroke-width="1.5" fill="none"/>
+              <path d="M44 30 L40 34 L44 38" stroke="#F5D87A" stroke-width="1.5" fill="none"/>
+            </svg>
+            <span>Gold</span>
+          </div>
+          <!-- Frame 4: Dreamy soft -->
+          <div class="aes-frame-opt" onclick="applyFrame(this,'frame-dreamy')" title="Dreamy">
+            <svg viewBox="0 0 48 48" width="44">
+              <rect x="4" y="4" width="40" height="40" rx="12" fill="none" stroke="#C5A8E8" stroke-width="2.5"/>
+              <path d="M14 4 Q24 10 34 4" stroke="#C5A8E8" stroke-width="1.5" fill="none"/>
+              <path d="M14 44 Q24 38 34 44" stroke="#C5A8E8" stroke-width="1.5" fill="none"/>
+              <path d="M4 14 Q10 24 4 34" stroke="#C5A8E8" stroke-width="1.5" fill="none"/>
+              <path d="M44 14 Q38 24 44 34" stroke="#C5A8E8" stroke-width="1.5" fill="none"/>
+            </svg>
+            <span>Dreamy</span>
+          </div>
+          <!-- Frame 5: No frame -->
+          <div class="aes-frame-opt" onclick="applyFrame(this,'frame-none')" title="Clean">
+            <svg viewBox="0 0 48 48" width="44">
+              <rect x="4" y="4" width="40" height="40" rx="8" fill="#F5F9FC"/>
+              <text x="24" y="30" text-anchor="middle" font-size="18" fill="#AED9F5">✕</text>
+            </svg>
+            <span>Clean</span>
+          </div>
+        </div>
+
+        <button class="btn-fancy" onclick="toPage('p2')">Let's Go! <i class="fas fa-arrow-right ms-2"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P2: BIRTHDAY ══ -->
+  <section id="p2" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob2"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3">
+      <div class="bday-main-card text-center">
+        <div class="crown-anim"><img src="https://cdn-icons-png.flaticon.com/512/1693/1693749.png" alt="crown" class="crown-img"/></div>
+        <div class="confetti-strip">🎊 🎉 🎈 🎁 🎂 🎈 🎉 🎊</div>
+        <h1 class="bday-h1">Happy Birthday</h1>
+        <h2 class="bday-h2"><span class="bday-nick">Bey</span> 💙</h2>
+        <p class="bday-date"><i class="fas fa-calendar-heart me-2"></i>31 Mei 2026 • Dinner at 20:00 WIB</p>
+        <div class="cd-wrap">
+          <p class="cd-title">⏰ Countdown to Your Birthday!</p>
+          <div class="cd-grid">
+            <div class="cd-unit"><span id="cdD">00</span><small>Days</small></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span id="cdH">00</span><small>Hours</small></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span id="cdM">00</span><small>Mins</small></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span id="cdS">00</span><small>Secs</small></div>
+          </div>
+        </div>
+        <div id="bdayNow" class="bday-now" style="display:none">🎂✨ TODAY IS YOUR SPECIAL DAY, BEY! ✨🎂</div>
+        <button class="btn-fancy mt-3" onclick="toPage('p3')">Tiup Lilin Yuk! <i class="fas fa-fire ms-2"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P3: CAKE (candles on top) ══ -->
+  <section id="p3" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob3"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 py-4 px-3">
+      <div class="cake-card text-center w-100" style="max-width:700px">
+        <div class="mb-3"><span class="cake-header-pill">🎂 Make a Wish yh Bey!</span></div>
+        <p class="cake-sub-txt">Klik tiap lilin untuk memadamkannya(<span class="badge-cc" id="cCount">0</span> / 5 padam)</p>
+
+        <!-- CAKE TOP, KADO BELOW -->
+        <div class="cake-svg-container mb-2" style="max-width:360px;margin:0 auto">
+          <svg viewBox="0 0 440 420" xmlns="http://www.w3.org/2000/svg" class="cake-main-svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8EEFF"/><stop offset="100%" stop-color="#87CEEB"/></linearGradient>
+              <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#B0E4FF"/><stop offset="100%" stop-color="#74BBD9"/></linearGradient>
+              <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#DCF3FF"/><stop offset="100%" stop-color="#A8D8EE"/></linearGradient>
+              <filter id="sh"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="rgba(87,170,210,0.25)"/></filter>
+            </defs>
+            <ellipse cx="220" cy="385" rx="185" ry="20" fill="url(#g1)" opacity=".5"/>
+            <rect x="30" y="282" width="320" height="98" rx="22" fill="url(#g1)" filter="url(#sh)"/>
+            <rect x="30" y="282" width="320" height="24" rx="12" fill="white" opacity=".6"/>
+            <path d="M46 284 Q68 268 90 284 Q112 300 134 284 Q156 268 178 284 Q200 300 222 284 Q244 268 266 284 Q288 300 310 284 Q332 268 350 284" stroke="white" stroke-width="10" fill="none" opacity=".9"/>
+            <circle cx="75" cy="330" r="10" fill="#FFB6C1" opacity=".85"/><circle cx="120" cy="348" r="8" fill="#FFD700" opacity=".85"/>
+            <circle cx="165" cy="330" r="10" fill="#B0E4FF" opacity=".85"/><circle cx="210" cy="346" r="8" fill="#FFB6C1" opacity=".85"/>
+            <circle cx="255" cy="330" r="10" fill="#FFD700" opacity=".85"/><circle cx="300" cy="347" r="8" fill="#B0E4FF" opacity=".85"/><circle cx="345" cy="331" r="9" fill="#FFB6C1" opacity=".85"/>
+            <rect x="75" y="205" width="240" height="88" rx="18" fill="url(#g2)" filter="url(#sh)"/>
+            <rect x="75" y="205" width="240" height="22" rx="11" fill="white" opacity=".55"/>
+            <path d="M88 207 Q105 196 122 207 Q139 218 156 207 Q173 196 190 207 Q207 218 224 207 Q241 196 258 207 Q275 218 292 207 Q305 196 315 207" stroke="white" stroke-width="9" fill="none" opacity=".85"/>
+            <circle cx="106" cy="242" r="8" fill="#FFB6C1" opacity=".8"/><circle cx="150" cy="256" r="7" fill="#FFD700" opacity=".8"/>
+            <circle cx="195" cy="242" r="8" fill="#B0E4FF" opacity=".8"/><circle cx="240" cy="255" r="7" fill="#FFB6C1" opacity=".8"/><circle cx="280" cy="242" r="8" fill="#FFD700" opacity=".8"/>
+            <text x="195" y="268" text-anchor="middle" font-family="Pacifico,cursive" font-size="22" fill="#4A9CC8" font-weight="bold">19th ✨</text>
+            <rect x="125" y="142" width="170" height="74" rx="16" fill="url(#g3)" filter="url(#sh)"/>
+            <rect x="125" y="142" width="170" height="20" rx="10" fill="white" opacity=".5"/>
+            <path d="M136 144 Q151 134 166 144 Q181 154 196 144 Q211 134 226 144 Q241 154 256 144 Q271 134 280 144" stroke="white" stroke-width="8" fill="none" opacity=".8"/>
+            <text x="210" y="192" text-anchor="middle" font-size="28">💙</text>
+            <text x="55" y="178" font-size="20" opacity=".75">✨</text><text x="348" y="172" font-size="20" opacity=".75">✨</text>
+            <!-- Candles -->
+            <g id="c0" class="candle-g" onclick="blowCandle(0)"><rect x="149" y="115" width="14" height="36" rx="6" fill="#FFB6C1"/><ellipse cx="156" cy="115" rx="8" ry="5" fill="#FFD8E0"/><line x1="156" y1="110" x2="156" y2="98" stroke="#bbb" stroke-width="2.5"/><g id="fl0" class="flame"><ellipse cx="156" cy="91" rx="9" ry="14" fill="#FFD700" class="ff"/><ellipse cx="156" cy="95" rx="5.5" ry="9" fill="#FF6B1A" class="ff" style="animation-delay:.1s"/><ellipse cx="156" cy="99" rx="2.5" ry="4" fill="white" opacity=".7"/></g></g>
+            <g id="c1" class="candle-g" onclick="blowCandle(1)"><rect x="172" y="108" width="14" height="43" rx="6" fill="#ADD8E6"/><ellipse cx="179" cy="108" rx="8" ry="5" fill="#CCF0FF"/><line x1="179" y1="103" x2="179" y2="91" stroke="#bbb" stroke-width="2.5"/><g id="fl1" class="flame"><ellipse cx="179" cy="84" rx="9" ry="14" fill="#FFD700" class="ff"/><ellipse cx="179" cy="88" rx="5.5" ry="9" fill="#FF6B1A" class="ff" style="animation-delay:.2s"/><ellipse cx="179" cy="92" rx="2.5" ry="4" fill="white" opacity=".7"/></g></g>
+            <g id="c2" class="candle-g" onclick="blowCandle(2)"><rect x="199" y="104" width="14" height="47" rx="6" fill="#FFD700"/><ellipse cx="206" cy="104" rx="8" ry="5" fill="#FFF3B0"/><line x1="206" y1="99" x2="206" y2="87" stroke="#bbb" stroke-width="2.5"/><g id="fl2" class="flame"><ellipse cx="206" cy="80" rx="9" ry="14" fill="#FFD700" class="ff"/><ellipse cx="206" cy="84" rx="5.5" ry="9" fill="#FF6B1A" class="ff" style="animation-delay:.15s"/><ellipse cx="206" cy="88" rx="2.5" ry="4" fill="white" opacity=".7"/></g></g>
+            <g id="c3" class="candle-g" onclick="blowCandle(3)"><rect x="225" y="108" width="14" height="43" rx="6" fill="#B5D8FF"/><ellipse cx="232" cy="108" rx="8" ry="5" fill="#DCEEFF"/><line x1="232" y1="103" x2="232" y2="91" stroke="#bbb" stroke-width="2.5"/><g id="fl3" class="flame"><ellipse cx="232" cy="84" rx="9" ry="14" fill="#FFD700" class="ff"/><ellipse cx="232" cy="88" rx="5.5" ry="9" fill="#FF6B1A" class="ff" style="animation-delay:.25s"/><ellipse cx="232" cy="92" rx="2.5" ry="4" fill="white" opacity=".7"/></g></g>
+            <g id="c4" class="candle-g" onclick="blowCandle(4)"><rect x="249" y="115" width="14" height="36" rx="6" fill="#D4A8FF"/><ellipse cx="256" cy="115" rx="8" ry="5" fill="#EDD8FF"/><line x1="256" y1="110" x2="256" y2="98" stroke="#bbb" stroke-width="2.5"/><g id="fl4" class="flame"><ellipse cx="256" cy="91" rx="9" ry="14" fill="#FFD700" class="ff"/><ellipse cx="256" cy="95" rx="5.5" ry="9" fill="#FF6B1A" class="ff" style="animation-delay:.3s"/><ellipse cx="256" cy="99" rx="2.5" ry="4" fill="white" opacity=".7"/></g></g>
+          </svg>
+          <p class="cake-hint-txt">💡 Tap tiap lilin untuk memadamkan!</p>
+        </div>
+
+
+
+        <div id="cakeAllDone" class="alert alert-info border-0 text-center" style="background:linear-gradient(135deg,var(--blue-pale),#EFF9FF);border-radius:16px;display:none">
+          <div class="d-flex align-items-center justify-content-center gap-2 flex-wrap">
+            <span style="font-size:1.8rem">🎊</span>
+            <div><strong>Semua lilin padam!</strong> Happibidii yh sayangku! 🎂💙<br><small class="text-muted">Semua hadiah sudah terbuka untukmu 🎁</small></div>
+            <span style="font-size:1.8rem">🎊</span>
+          </div>
+          <button class="btn-fancy mt-3" onclick="toPage('p3b')">Cut the Cake! 🔪 <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P3b: CUT CAKE ══ -->
+  <section id="p3b" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob2"></div><div class="bg-blob blob3"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3">
+      <div class="cutcake-card">
+        <!-- Bootstrap badge header -->
+        <div class="d-flex justify-content-center mb-3">
+          <span class="badge rounded-pill px-4 py-2" style="background:linear-gradient(135deg,var(--blue-mid),var(--blue-main));font-size:.9rem;letter-spacing:.5px">🎂 CAKE TIME</span>
+        </div>
+        <h2 class="cutcake-title">Cut the Cake ya sayang!</h2>
+        <p class="cutcake-sub">Potong kuenya dan buat harapan ✨</p>
+
+        <!-- Cut instruction card -->
+        <div id="cutInstruction">
+          <div class="card border-0 mb-3" style="background:var(--blue-pale);border-radius:16px">
+            <div class="card-body text-center py-3">
+              <i class="fas fa-hand-pointer fa-2x mb-2" style="color:var(--blue-main)"></i>
+              <p class="mb-0 fw-bold" style="color:var(--text)">Klik kue untuk memotongnya!</p>
+              <small style="color:var(--text-soft)">Kue akan terpotong untuk keluargamu tercinta 💙</small>
+            </div>
+          </div>
+
+          <!-- Whole cake before cut -->
+          <div class="text-center mb-2" id="wholeCakeWrap">
+            <svg id="cakeCutImg" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" style="width:240px;height:auto;display:inline-block">
+              <ellipse cx="110" cy="178" rx="90" ry="14" fill="#AED9F5" opacity=".4"/>
+              <ellipse cx="110" cy="145" rx="80" ry="22" fill="#87CEEB"/>
+              <rect x="30" y="100" width="160" height="47" rx="10" fill="#B0E4FF"/>
+              <ellipse cx="110" cy="100" rx="80" ry="20" fill="#C8EEFF"/>
+              <path d="M35 102 Q55 88 75 102 Q95 116 115 102 Q135 88 155 102 Q175 116 185 102" stroke="white" stroke-width="9" fill="none" opacity=".9"/>
+              <ellipse cx="110" cy="84" rx="68" ry="16" fill="#D0EEFF"/>
+              <rect x="42" y="54" width="136" height="32" rx="8" fill="#DCF3FF"/>
+              <ellipse cx="110" cy="54" rx="68" ry="16" fill="#E8F7FF"/>
+              <text x="110" y="82" text-anchor="middle" font-size="20">💙</text>
+              <rect x="104" y="24" width="12" height="34" rx="4" fill="#FFB6C1"/>
+              <ellipse cx="110" cy="24" rx="7" ry="4" fill="#FFD8E0"/>
+              <ellipse cx="110" cy="15" rx="8" ry="11" fill="#FFD700"/>
+              <ellipse cx="110" cy="19" rx="5" ry="7" fill="#FF6B1A"/>
+              <circle cx="55" cy="118" r="6" fill="#FFB6C1"/><circle cx="85" cy="128" r="5" fill="#FFD700"/>
+              <circle cx="110" cy="119" r="6" fill="#AED9F5"/><circle cx="135" cy="127" r="5" fill="#FFB6C1"/><circle cx="165" cy="118" r="6" fill="#FFD700"/>
+              <!-- Dashed cut lines preview -->
+              <line x1="110" y1="54" x2="110" y2="165" stroke="rgba(87,170,210,.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            </svg>
+          </div>
+          <button class="btn-fancy btn-fancy-pink w-100" onclick="doCutCake()">
+            <i class="fas fa-cut me-2"></i>Cut the Cake!
+          </button>
+
+          <!-- Sliced cake: 7 pieces, shown after cut -->
+          <div id="slicedCakeWrap" style="display:none;margin-top:12px">
+            <p class="text-center fw-bold mb-3" style="color:var(--blue-main);font-size:.95rem">🎂 Ini potongan kue untuk keluargamu tercinta sayang!</p>
+            <div id="slicesGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:340px;margin:0 auto"></div>
+            <div id="sliceNextBtn" style="display:none;text-align:center;margin-top:18px">
+              <button class="btn-fancy" onclick="updateCutUI()">
+                <i class="fas fa-star me-2"></i>Make A Wish! ✨
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- After cut: wish section -->
+        <div id="wishSection" style="display:none">
+          <!-- Bootstrap card for wish -->
+          <div class="card border-0 shadow-sm mb-4" style="border-radius:20px;overflow:hidden">
+            <div class="card-header text-center py-3" style="background:linear-gradient(135deg,var(--pink-soft),var(--pink-main));border:none">
+              <h4 class="mb-0 text-white fw-bold">🌟 Make A Wish!</h4>
+            </div>
+            <div class="card-body text-center py-4" style="background:linear-gradient(135deg,#FFF5F8,white)">
+              <img src="https://cdn-icons-png.flaticon.com/512/4341/4341157.png" style="width:90px;margin-bottom:12px;animation:bearWiggle 2s infinite" alt="cute"/>
+              <h5 style="color:var(--text);margin-bottom:8px;font-weight:900">Close your eyes and make a wish</h5>
+              <p style="color:var(--text-soft);font-size:.9rem;line-height:1.7">Pejamkan matamu sebentar, dan buat satu harapan yang paling kamu inginkan untuk tahun ini. Aku doain dari sini juga ya sayang 💙</p>
+              <p style="color:var(--text-soft);font-size:.85rem">Kalau sudah, tekan tombol di bawah ini.</p>
+              <button class="btn-fancy btn-fancy-gold mt-2" id="wishBtn" onclick="doMakeWish()">
+                <i class="fas fa-star me-2"></i>I Made My Wish!
+              </button>
+            </div>
+          </div>
+          <!-- After wish -->
+          <div id="wishDone" style="display:none">
+            <div class="alert border-0 text-center" style="background:linear-gradient(135deg,var(--blue-pale),#D4EDDA);border-radius:16px">
+              <div style="font-size:2.5rem;margin-bottom:8px">🌟✨🌟</div>
+              <p class="fw-bold mb-2" style="color:var(--text)">Hari ini milikmu sepenuhnya Bey! 💙</p>
+              <p style="color:var(--text-soft);font-size:.88rem;margin-bottom:16px;line-height:1.8">Rayakan bersama orang-orang tercinta yang dekat, peluk mereka erat. Yang jauh, percayalah mereka merasakan hangatnya hari ini dari mana pun mereka berada. Karena kebahagiaan sejatinya bukan soal seberapa meriah pestanya, tapi soal siapa yang ada di sampingmu. Karena mereka yang jauh pun tanpa kamu sadari sedang mendoakanmu dengan sepenuh hati. 🌟💙</p>
+              <button class="btn-fancy" onclick="toPage('p9')">Wishes for Bey's 🌟 <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P4: LETTER ══ -->
+  <section id="p4" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob2"></div><div class="bg-blob blob3"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3 py-5">
+      <div class="letter-outer">
+        <div class="letter-header-band">
+          <img src="https://cdn-icons-png.flaticon.com/512/833/833558.png" class="letter-heart-icon" alt="heart"/>
+          <h2 class="letter-title">💌 Surat Spesial Untukmu, Bey</h2>
+          <img src="https://cdn-icons-png.flaticon.com/512/833/833558.png" class="letter-heart-icon" alt="heart"/>
+        </div>
+        <div class="letter-paper-wrap">
+          <div class="letter-lines-bg"></div>
+          <div class="letter-content">
+            <p class="letter-greeting">Dear My Dearest Bey, 💙</p>
+            <p>Happy 19th Birthday, Andromeda.</p>
+            <p>Hari ini aku nulis surat ini sambil senyum sendiri, karena aku masih ga nyangka seberapa jauh kita udah sampai di sini. Dari awal yang ga disengaja, sampai jadi bagian terpenting dari hari-hariku.</p>
+            <p>Kamu inget ga, pertama kali kita ketemu di Elkafe? Waktu itu kamu bilang <em class="letter-em">"free poll"</em> ke ach dan aku yang tadinya cuma mau kerja kelompok bareng, tiba-tiba jadi betah di sana lebih lama sampai kamu telat masuk kerja. Siapa yang nyangka dua kata sederhana itu bisa jadi awal dari cerita yang sekarang jadi cerita favoritku? Andai kamu ga bilang itu, mungkin sampai sekarang kita masih ga kenal satu sama lain, dan aku ga akan pernah tau betapa spesialnya kamu.</p>
+            <p>Setiap momen sama kamu itu kayak hadiah yang datang tanpa aku minta, tapi selalu aku syukuri.</p>
+            <div class="row g-3 my-3">
+              <div class="col-md-4"><div class="letter-mem-card"><div class="lmc-icon">☕</div><div class="lmc-title">Elkafe</div><p class="lmc-txt">Where it all began. Dua kata yang merubah segalanya secara ga sengaja.</p></div></div>
+              <div class="col-md-4"><div class="letter-mem-card"><div class="lmc-icon">🏔️</div><div class="lmc-title">Gunung Prongos</div><p class="lmc-txt">22 Des 2025. Pertama kalinya aku ke alam dan semuanya terasa lebih bermakna karena ada kamu lalu dilanjut ke sraung.</p></div></div>
+              <div class="col-md-4"><div class="letter-mem-card"><div class="lmc-icon">🌊</div><div class="lmc-title">Pantai</div><p class="lmc-txt">05 Jan 2026. Pertama kalinya seumur hidup kakiku menyentuh pasir pantai, dan itu bareng kamu.</p></div></div>
+            </div>
+            <p>Kehadiranmu itu bukan sesuatu yang bisa aku gantikan dengan apapun. Kamu bukan cuma seseorang yang ada di hidupku, tapi seseorang yang bikin aku ngerti bahwa hal-hal terkecil pun bisa jadi hal terbesar kalau dilakukan bareng orang yang tepat.</p>
+            <p>Waktu aku ngeliat kamu berdiri di tepi pantai untuk pertama kalinya, ekspresi wajahmu itu aku ga akan pernah lupa. Ada sesuatu yang ringan, jujur, dan murni di sana. Dan aku bersyukur banget bisa jadi orang yang ada di sampingmu di momen itu.</p>
+            <p>Kamu tidak perlu sempurna untuk dicintai, Bey. Kamu sudah lebih dari cukup, exactly the way you are.</p>
+            <p>Terima kasih sudah ada. Terima kasih sudah mau dikenal. Terima kasih sudah jadi kamu yang apa adanya bahkan di depan aku. Itu hal yang ga semua orang bisa lakuin, dan aku menghargai itu lebih dari yang bisa aku katakan.</p>
+            <p>Selamat ulang tahun ke-19, calon suamiku. Semoga tahun ini jadi tahun terbaik yang pernah kamu jalani, penuh dengan hal-hal yang bikin hatimu hangat dan matamu berbinar.</p>
+            <div class="letter-sig-block">
+              <p>With all my heart and more,</p>
+              <p class="letter-sig-name">Boo 🦋💙</p>
+              <p class="letter-ps"><em>Aku sayang kamu, lebih dari yang bisa aku ungkapkan dengan kata-kata. Dan itu tidak akan pernah berubah sayang. 🫶</em></p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <button class="btn-fancy" onclick="toPage('p5')">Our Memories 📸 <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P5: GALLERY ══ -->
+  <section id="p5" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob3"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3 py-5">
+      <div class="gallery-outer">
+        <h2 class="section-title text-center">📸 Our Precious Memories</h2>
+        <p class="section-sub text-center">Tiga momen yang ga akan pernah aku lupa, Bey 💙</p>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4 col-sm-6">
+            <div class="card mem-bs-card" onclick="openLb(0)">
+              <div class="mem-img-overlay-wrap">
+                <img src="image/photo1.jpeg" class="card-img-top" alt="Elkafe"/>
+                <div class="mem-img-overlay"><i class="fas fa-expand-alt fa-lg"></i><span>Lihat Foto</span></div>
+              </div>
+              <div class="card-body">
+                <p class="card-text fw-bold mb-1" style="color:var(--text);font-size:.9rem">"Free poll" dua kata yang merubah segalanya ✨</p>
+                <p class="card-text" style="color:var(--text-soft);font-size:.82rem">Andai kamu ga bilang itu, mungkin kita ga akan pernah kenal</p>
+              </div>
+              <div class="card-footer mem-bs-badge">☕ Elkafe • Pertemuan Pertama</div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="card mem-bs-card" onclick="openLb(1)">
+              <div class="mem-img-overlay-wrap">
+                <img src="image/photo2.jpeg" class="card-img-top" alt="Prongos"/>
+                <div class="mem-img-overlay"><i class="fas fa-expand-alt fa-lg"></i><span>Lihat Foto</span></div>
+              </div>
+              <div class="card-body">
+                <p class="card-text fw-bold mb-1" style="color:var(--text);font-size:.9rem">Pertemuan pertama setelah Elkafe, terasa beda dan spesial 💙</p>
+                <p class="card-text" style="color:var(--text-soft);font-size:.82rem">Pertama kalinya aku ke alam, dan ada kamu di sana</p>
+              </div>
+              <div class="card-footer mem-bs-badge">🏔️ Gunung Prongos • 22 Des 2025</div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="card mem-bs-card" onclick="openLb(2)">
+              <div class="mem-img-overlay-wrap">
+                <img src="image/photo3.jpeg" class="card-img-top" alt="Pantai"/>
+                <div class="mem-img-overlay"><i class="fas fa-expand-alt fa-lg"></i><span>Lihat Foto</span></div>
+              </div>
+              <div class="card-body">
+                <p class="card-text fw-bold mb-1" style="color:var(--text);font-size:.9rem">Pertama kali kakiku menyentuh pasir pantai 🌊</p>
+                <p class="card-text" style="color:var(--text-soft);font-size:.82rem">2 minggu setelah Prongos, momen yang ga akan pernah aku lupa</p>
+              </div>
+              <div class="card-footer mem-bs-badge">🌊 Pantai • 05 Jan 2026</div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <button class="btn-fancy" onclick="toPage('p6')">Beautiful Journey 🌸 <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox-layer" onclick="closeLb()">
+    <div class="lb-inner" onclick="event.stopPropagation()">
+      <button class="lb-x" onclick="closeLb()"><i class="fas fa-times"></i></button>
+      <img id="lbImg" src="" alt="" class="lb-photo" style="display:none"/>
+      <div id="lbCap" class="lb-cap-text"></div>
+    </div>
+  </div>
+
+  <!-- ══ P6: JOURNEY ══ -->
+  <section id="p6" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob2"></div><div class="bg-blob blob1"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3 py-5">
+      <div class="journey-outer">
+        <h2 class="section-title text-center">🌸 Our Beautiful Journey</h2>
+        <p class="section-sub text-center">Dari ga sengaja ketemu sampai jadi bagian paling indah 💙</p>
+        <div class="bs-timeline position-relative">
+          <!-- Step 1 -->
+          <div class="bs-tl-item">
+            <div class="bs-tl-content">
+              <div class="bs-tl-card">
+                <div class="tl-emoji">☕</div>
+                <div class="tl-date">Suatu Hari di Elkafe</div>
+                <div class="tl-title">"Free Poll" Awal Segalanya</div>
+                <p class="tl-text">Dua kata yang tanpa kamu sadari jadi awal dari cerita yang paling aku suka. Andai kamu ga bilang itu ke ach, mungkin kita masih asing sampai sekarang. 🍀</p>
+              </div>
+            </div>
+            <div class="bs-tl-dot">☕</div>
+            <div class="bs-tl-content"></div>
+          </div>
+          <div class="bs-tl-spacer"></div>
+          <!-- Step 2 -->
+          <div class="bs-tl-item">
+            <div class="bs-tl-content"></div>
+            <div class="bs-tl-dot">🏔️</div>
+            <div class="bs-tl-content">
+              <div class="bs-tl-card">
+                <div class="tl-emoji">🏔️</div>
+                <div class="tl-date">22 Desember 2025</div>
+                <div class="tl-title">Gunung Prongos, Lantai 2 Kediri</div>
+                <p class="tl-text">Pertemuan pertama setelah Elkafe. Pertama kalinya aku ke alam, dan semuanya terasa jauh lebih spesial karena ada kamu di sana. 💙</p>
+              </div>
+            </div>
+          </div>
+          <div class="bs-tl-spacer"></div>
+          <!-- Step 3 -->
+          <div class="bs-tl-item">
+            <div class="bs-tl-content">
+              <div class="bs-tl-card">
+                <div class="tl-emoji">🌊</div>
+                <div class="tl-date">05 Januari 2026</div>
+                <div class="tl-title">Pertama Kali ke Pantai</div>
+                <p class="tl-text">2 minggu setelah Prongos. Pertama kalinya seumur hidup kakiku menyentuh pasir pantai, dan kamu ada di sana. 🌅✨</p>
+              </div>
+            </div>
+            <div class="bs-tl-dot">🌊</div>
+            <div class="bs-tl-content"></div>
+          </div>
+          <div class="bs-tl-spacer"></div>
+          <!-- Step 4 -->
+          <div class="bs-tl-item">
+            <div class="bs-tl-content"></div>
+            <div class="bs-tl-dot bs-tl-dot-gold">🎂</div>
+            <div class="bs-tl-content">
+              <div class="bs-tl-card bs-tl-card-gold">
+                <div class="tl-emoji">🎂</div>
+                <div class="tl-date">31 Mei 2026 ✨</div>
+                <div class="tl-title">Happy 19th Birthday, Bey!</div>
+                <p class="tl-text">Dan kini kita ada di sini. Ulang tahunmu ke-19. Semoga chapter ini penuh kebahagiaan, cinta, dan momen indah untuk kita berdua. 💙🎊</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <button class="btn-fancy" onclick="toPage('p7')">Quiz Time! 🧠 <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P7: QUIZ ══ -->
+  <section id="p7" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob2"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3">
+      <div class="quiz-outer">
+        <div class="text-center mb-3">
+          <img src="https://cdn-icons-png.flaticon.com/512/4341/4341025.png" class="quiz-bear" alt="bear"/>
+          <h2 class="section-title">Seberapa Kenal Kamu? 🧠💙</h2>
+          <p class="section-sub">Kamu punya <strong id="attLeft">2</strong> kesempatan. Kalau habis, rundown terkunci! 😤</p>
+          <div class="hearts-row">
+            <div class="heart-life" id="hl0"><i class="fas fa-heart"></i></div>
+            <div class="heart-life" id="hl1"><i class="fas fa-heart"></i></div>
+          </div>
+        </div>
+        <div class="quiz-prog-wrap">
+          <div class="quiz-prog-track"><div class="quiz-prog-fill" id="qFill" style="width:0%"></div></div>
+          <span id="qProg" class="quiz-prog-label">0 / 4</span>
+        </div>
+        <div id="quizBody">
+          <div class="question-card" id="qCard">
+            <div class="q-badge" id="qBadge">Q1</div>
+            <p class="q-text" id="qText">Loading...</p>
+            <div class="row g-2 mt-1" id="qOpts"></div>
+            <div class="q-fb" id="qFb"></div>
+          </div>
+        </div>
+        <div id="quizEnd" class="quiz-end-msg" style="display:none"></div>
+        <div class="quiz-score-bar">Score: <span id="qScore" class="quiz-score-val">0</span>/4</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P8: GIFTS (Riddle) ══ -->
+  
+
+  <!-- ══ P9: WISHES ══ -->
+  <section id="p9" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob3"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3 py-5">
+      <div class="wishes-outer">
+        <h2 class="section-title text-center">🌟 Wishes for Bey's 19th Year</h2>
+        <p class="section-sub text-center">Semua doa ini aku kirimkan untukmu 💙</p>
+        <ul class="list-group list-group-flush mb-4" style="border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)">
+          <li class="list-group-item wish-lg-item">
+            <div class="wish-lg-icon">💚</div>
+            <div><h5>Health and Wellbeing</h5><p>Semoga kamu selalu diberikan kesehatan. Jaga dirimu baik-baik ya, karena kamu berharga banget buat orang-orang yang sayang kamu!, jangan sakit-sakit sayang aku gamau liat kamu sakit kamu harus bisa jaga kesehatan diri kamu sendiri walaupun kita lagi ldr aku gabisa ikut buat bantu rawat kamu, suapin kamu, bawain obat. Kamu jangan stress-stress ya sayang, kamu harus bisa kendalikan dirikamu menjadi lebih tenang, dan tolong hilangkan roko mu itu apabila kamu sayang dengan kesehatanmu. </p></div>
+          </li>
+          <li class="list-group-item wish-lg-item">
+            <div class="wish-lg-icon">⭐</div>
+            <div><h5>Dreams Come True</h5><p>Apapun yang kamu impikan, semoga semuanya bisa terwujud. Kamu layak mendapatkan semua hal indah di dunia ini, tanpa terkecuali.</p></div>
+          </li>
+          <li class="list-group-item wish-lg-item">
+            <div class="wish-lg-icon">🏔️</div>
+            <div><h5>More Adventures</h5><p>Semoga kita bisa explore lebih banyak tempat bersama. From mountains to beaches and beyond, petualangan kita tak akan pernah berakhir!</p></div>
+          </li>
+          <li class="list-group-item wish-lg-item">
+            <div class="wish-lg-icon">💙</div>
+            <div><h5>Endless Love</h5><p>No matter what, aku selalu ada buat kamu. Selalu sayang, selalu dukung, selalu hadir. Forever and always, Bey!</p></div>
+          </li>
+          <li class="list-group-item wish-lg-item">
+            <div class="wish-lg-icon">🐱</div>
+            <div><h5>Cat Energy All Day!</h5><p>Semoga kamu punya semangat seekor kucing yang selalu penasaran, lincah, dan tetap lucu di situasi apapun wkwk lucu bgt. Kamu harus semangat terus ya sayang buat hidup kamu, keluarga kamu, aku, keluargaku, dan tidak terlupa keluarga kita yang nanti nya akan kamu bawa berlayar ke samudra. 🐾</p></div>
+          </li>
+        </ul>
+        <div id="gPending" class="rundown-gate gate-pending"><p>Selesaikan quiz dulu untuk membuka rundown malam ini!</p><button class="btn-outline-fancy" onclick="toPage('p7')">Ke Quiz <i class="fas fa-arrow-right ms-1"></i></button></div>
+        <div id="gOk" class="rundown-gate gate-ok" style="display:none"><p>Quiz passed! Akses rundown malam ini terbuka 🔓</p><button class="btn-fancy" onclick="toPage('p10')">Secret Plan Tonight 🗝️ <i class="fas fa-arrow-right ms-2"></i></button></div>
+        <div id="gLocked" class="rundown-gate gate-locked" style="display:none"><p>Akses terkunci karena gagal di quiz. Berarti kamu udah ga sayang aku lagi, karena gabisa jawab quiz nya. Hubungi aku langsung ya untuk akses rundown nya 💙</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ P10: RUNDOWN ══ -->
+  <section id="p10" class="pg">
+    <div class="pg-bg-deco"><div class="bg-blob blob1"></div><div class="bg-blob blob2"></div><div class="bg-blob blob3"></div></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 px-3 py-5">
+      <div class="rundown-outer">
+        <div class="text-center mb-4">
+          <span class="rd-top-badge"><i class="fas fa-user-secret me-2"></i>TOP SECRET OPERATION BEY 🕵️</span>
+          <h2 class="section-title mt-3">🗝️ Secret Plan: 31 Mei 2026</h2>
+          <p class="section-sub">Ini rencana malam ini. Keep it secret. Let the magic happen. 🤫✨</p>
+        </div>
+
+        <!-- Bootstrap Stepper -->
+        <div class="bs-stepper mb-4">
+          <div class="bs-step">
+            <div class="bs-step-connector">
+              <div class="bs-step-circle">🕶️</div>
+              <div class="bs-step-line"></div>
+            </div>
+            <div class="bs-step-body">
+              <div class="bs-step-card">
+                <div class="bs-step-time">19:30 - 20:00 WIB</div>
+                <div class="bs-step-phase">Phase 1: Stealth Mode</div>
+                <p>Bey menuju secret place. Jangan banyak tanya dulu, cukup ikutin hati. Malam ini sepenuhnya untukmu dan kita akan dinner bersama. 🌙</p>
+              </div>
+            </div>
+          </div>
+          <div class="bs-step">
+            <div class="bs-step-connector">
+              <div class="bs-step-circle bs-step-circle-pink">💥</div>
+              <div class="bs-step-line"></div>
+            </div>
+            <div class="bs-step-body">
+              <div class="bs-step-card bs-step-card-pink">
+                <div class="bs-step-time">20:00 - 20:10 WIB</div>
+                <div class="bs-step-phase">Phase 2: BOO Appears!</div>
+                <p>Boo datang ke secret place Bey.</p>
+                <div class="rd-mission-box">
+                  <i class="fas fa-map-pin me-2 text-danger"></i>
+                  <strong>Location Check:</strong> Lihat menu, lalu pesan atas nama <span class="rd-codename">"Salsabila"</span> di meja yang sudah direservasi. Kalau ada atas nama tersebut, berarti kamu di tempat yang benar! ✅
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bs-step">
+            <div class="bs-step-connector">
+              <div class="bs-step-circle">🍝</div>
+              <div class="bs-step-line"></div>
+            </div>
+            <div class="bs-step-body">
+              <div class="bs-step-card">
+                <div class="bs-step-time">20:10 - 21:00 WIB</div>
+                <div class="bs-step-phase">Phase 3: Dinner and Chill</div>
+                <p>Makan bersama, ngobrol santai, lupakan dunia sejenak. Good food, good vibes and a perfect night for two. 🥂✨</p>
+              </div>
+            </div>
+          </div>
+          <div class="bs-step">
+            <div class="bs-step-connector">
+              <div class="bs-step-circle">💬</div>
+              <div class="bs-step-line"></div>
+            </div>
+            <div class="bs-step-body">
+              <div class="bs-step-card">
+                <div class="bs-step-time">21:00 - 22:00 WIB</div>
+                <div class="bs-step-phase">Phase 4: Deep Talk Session</div>
+                <p>Waktunya deeptalk. kita cerita, ketawa, nangis dikit juga gapapa. No judgment, only love and honesty. Aku di sini untuk dengerin semuanya. 💙</p>
+              </div>
+            </div>
+          </div>
+          <div class="bs-step">
+            <div class="bs-step-connector">
+              <div class="bs-step-circle bs-step-circle-gold">🌟</div>
+            </div>
+            <div class="bs-step-body">
+              <div class="bs-step-card bs-step-card-gold">
+                <div class="bs-step-time">22:00 - 23:00 WIB</div>
+                <div class="bs-step-phase">Phase 5: Say Your Wish and Pray</div>
+                <p>Tutup malam indah ini dengan harapan dan doa. May your 19th year be blessed, bright, and full of beautiful surprises. 🤲🌙</p>
+                <div class="rd-mission-box" style="background:linear-gradient(135deg,#FFF9E6,var(--blue-pale))">
+                  <i class="fas fa-heart me-2 text-danger"></i><strong>Final Note:</strong> Remember who loves you. Always. 💙
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checklist card -->
+        <div class="card rd-checklist-card mb-4">
+          <div class="rd-checklist-header"><i class="fas fa-bell me-2"></i>DON'T FORGET TONIGHT, BEY 💙</div>
+          <div class="card-body">
+            <ul class="list-unstyled mb-0">
+              <li class="rdcl-item"><label class="d-flex align-items-start gap-2 w-100 cursor-pointer"><input type="checkbox" class="mt-1 flex-shrink-0" style="accent-color:var(--blue-main);width:17px;height:17px"> Wear your favorite outfit, kamu selalu keliatan amazing 💫</label></li>
+              <li class="rdcl-item"><label class="d-flex align-items-start gap-2 w-100 cursor-pointer"><input type="checkbox" class="mt-1 flex-shrink-0" style="accent-color:var(--blue-main);width:17px;height:17px"> Charge your phone and your heart sebelum berangkat 🔋</label></li>
+              <li class="rdcl-item"><label class="d-flex align-items-start gap-2 w-100 cursor-pointer"><input type="checkbox" class="mt-1 flex-shrink-0" style="accent-color:var(--blue-main);width:17px;height:17px"> Remember: you are deeply loved, exactly as you are 🥰</label></li>
+              <li class="rdcl-item"><label class="d-flex align-items-start gap-2 w-100 cursor-pointer"><input type="checkbox" class="mt-1 flex-shrink-0" style="accent-color:var(--blue-main);width:17px;height:17px"> Senyum ke aku waktu kita ketemu, I'll be watching 😉💕</label></li>
+            </ul>
+            <div class="rdcl-footer mt-3">See you at 20:00 WIB Bey! Don't be late. I'll be waiting. 🌙✨</div>
+          </div>
+        </div>
+
+        <!-- Dinner countdown -->
+        <div class="dinner-cd-card">
+          <p class="dcd-title">⏰ Countdown to Dinner 31 Mei 2026, 20:00 WIB</p>
+          <div class="cd-grid">
+            <div class="cd-unit"><span id="dcD">00</span><small>Days</small></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span id="dcH">00</span><small>Hours</small></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span id="dcM">00</span><small>Mins</small></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span id="dcS">00</span><small>Secs</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-hearts">💙 🐱 💙 🐱 💙</div>
+      <p class="footer-sig">Made with <i class="fas fa-heart text-danger"></i> for Bey</p>
+      <p class="footer-code">0202 • Our Special Code 💙</p>
+      <p class="footer-final">Happy 19th Birthday, Andromeda! 🎂✨</p>
+      <p class="footer-tiny">Forever and Always 💙🐾</p>
+    </footer>
+  </section>
+
+</div>
+
+<canvas id="floatCanvas" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9990;width:100%;height:100%"></canvas>
+<audio id="bgMusic" loop preload="auto"><source src="music/birthday.mp3" type="audio/mpeg"/></audio>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="js/script.js"></script>
+<!-- Extra functions for decorate page -->
+<script>
+function applySticker(el, emoji) {
+  SFX.sticker();
+  el.classList.add('placed');
+  const overlay = document.getElementById('overlaySticker');
+  if (overlay) { overlay.textContent = emoji; overlay.style.fontSize = '2.5rem'; }
+  popConfetti(0.5, 0.5, 20);
+}
+</script>
+</body>
+</html>
